@@ -3,8 +3,18 @@ const app = express();
 const {port,mongoURI} = require("./config/config")
 const connection = require("./config/db")
 const tasks = require("./routes/tasks")
+const notFound = require("./middleware/not-found")
+const errorHandler = require('./middleware/error-handler')
 
+//Middleware to parse the body
 app.use(express.json())
+
+//Routes
+app.use("/api/v1/tasks",tasks)
+
+//Not Found Middleware
+app.use(notFound)
+app.use(errorHandler)
 const start = async()=>{
     try {
         await connection(mongoURI);
@@ -15,6 +25,4 @@ const start = async()=>{
 }
 
 start();
-
-app.use("/api/v1/tasks",tasks)
 
