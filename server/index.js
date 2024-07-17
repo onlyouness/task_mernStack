@@ -15,7 +15,7 @@ app.use(cors())
 
 //Routes
 app.use("/api/v1/tasks",tasks)
-app.use("/api/v1/",auth)
+app.use("/api/v1",auth)
 
 //Not Found Middleware
 app.use(notFound)
