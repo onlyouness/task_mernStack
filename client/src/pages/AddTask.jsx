@@ -33,7 +33,7 @@ const AddTask = ({ isEditing }) => {
         createTask(data,navigate)
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex jsutify-center flex-col w-1/2 mx-auto gap-3 mt-10'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex jsutify-center flex-col w-4/5 sm:w-1/2 mx-auto gap-3 mt-10'>
             <h1 className='mb-5 text-2xl '>Enter The Task</h1>
             <div>
                 <Controller

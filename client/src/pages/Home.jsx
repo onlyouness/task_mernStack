@@ -29,7 +29,7 @@ const Home = () => {
     return (
         <>
             <Toaster/>
-            <div className='w-1/2 mx-auto my-5'>
+            <div className='sm:w-1/2 w-4/5 mx-auto my-5'>
               
                 <div className='mt-10'>
                     {data.length > 0 ? 

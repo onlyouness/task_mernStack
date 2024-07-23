@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Task = ({ task }) => {
     const navigate = useNavigate()
     return (
-        <motion.div whileHover={{ scale: 1.01 }} className={`flex justify-between items-center px-5 py-2 w-4/5 mx-auto bg-gray-100 my-4 `}>
+        <motion.div whileHover={{ scale: 1.01 }} className={`flex justify-between items-center px-5 py-2 sm:w-4/5 w-full mx-auto bg-gray-100 my-4 `}>
             <div>
                 <h1 className={`text-xl ${task.completed ? 'line-through text-gray-500' : ''}`}>{task.name}</h1>
                 <p className={`text-gray-600 ${task.completed ? 'line-through text-gray-400' : ''}`}>{task.description}</p>

@@ -19,13 +19,13 @@ const Header = () => {
 
 
     return (
-        <header className="py-5 bg-gray-100">
+        <header className="py-5 bg-gray-100 relative">
             <nav className="flex justify-between items-center w-4/5 mx-auto">
                 <div>
                     <Link className="text-semibold text-xl" to={"/"} >Tasks Manager</Link>
                 </div>
-                <div>
-                    <ul className="flex justify-center items-center gap-10 font-light">
+                <div className="sm:block hidden">
+                    <ul className="flex justify-center items-center gap-10 font-light sm:flex-row flex-col">
                         <li><Link to={"/"}>Home</Link></li>
                         <li><Link to={"/task/add"}>Add Task</Link></li>
                     </ul>

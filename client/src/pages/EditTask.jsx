@@ -49,7 +49,7 @@ const EditTask = () => {
     }
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className='flex jsutify-center flex-col w-1/2 mx-auto gap-3 mt-10'>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex jsutify-center flex-col sm:w-1/2 w-4/5 mx-auto gap-3 mt-10'>
                 <h1 className='mb-5 text-2xl '>Edit The Task</h1>
                 <div>
                     <Controller
