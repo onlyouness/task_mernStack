@@ -1,18 +1,26 @@
 const Task = require("../models/task");
 const mongoose = require("mongoose");
 const {createCustomError} = require('../errors/error-custom')
+const {jwtSecret} = require("../config/config");
+const User = require("../models/user");
+const jwt = require('jsonwebtoken')
+
 
 
 exports.getAllTasks = async (req, res,next) => {
-  const tasks = await Task.find({}).sort({created_at:-1});
+  
+  const user_id = req.user._id;
+  const tasks = await Task.find({user_id}).sort({created_at:-1});
   if (!tasks) {
     return next(createCustomError("The Tasks doesnt exists",400))
   }
   res.status(201).json({tasks});
 };
-exports.createTask = async (req, res) => {
+exports.createTask = async (req, res,next) => {
+  const user_id = req.user._id;
+  const {name,description,completed} = req.body
   try {
-    const task = await Task.create(req.body);
+    const task = await Task.create({name,description,completed,user_id});
     res.status(201).json({ task,status:"The Task Created Successfully" });
   } catch (error) {
     return next(createCustomError(error.message,500))

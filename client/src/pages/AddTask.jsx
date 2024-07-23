@@ -4,9 +4,11 @@ import { taskSchema } from '../validations/taskSchema'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import { createTask } from '../services/taskApi'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const AddTask = ({ isEditing }) => {
     const navigate = useNavigate();
+    
     const { handleSubmit, control, formState: { errors } } = useForm({
         resolver: async (data) => {
             try {

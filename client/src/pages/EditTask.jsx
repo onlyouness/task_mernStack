@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getTask, updateTask } from '../services/taskApi'
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import Loading from '../components/Loading'
 import { useForm, Controller } from 'react-hook-form'
 import { editSchema } from '../validations/editSchema'

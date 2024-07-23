@@ -5,7 +5,7 @@ const { createCustomError } = require("../errors/error-custom");
 
 const generateToken = (id) => {
   return jwt.sign({ id }, jwtSecret, {
-    expiresIn: "1h",
+    expiresIn: 3*24*60*60,
   });
 };
 
@@ -22,17 +22,13 @@ exports.register = async (req, res, next) => {
       );
     }
     const user = await User.create(req.body);
-    const token = generateToken(user._id);
-    res
-      .status(201)
-      .json({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
-        token,
-        status: true,
-        message: "Registered Successfully!",
-      });
+    const token = generateToken(res, user._id);
+    res.status(201).json({
+      user,
+      token,
+      status: true,
+      message: "Registered Successfully!",
+    });
   } catch (error) {
     next(createCustomError(error.message, 500));
   }
@@ -42,7 +38,6 @@ exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    // console.log("after comparing",user.matchPassword(user.password));
     if (!user) {
       return next(createCustomError("There is no user with this email", 400));
     }
@@ -53,15 +48,28 @@ exports.login = async (req, res, next) => {
       return next(createCustomError("Your password is incorrect", 400));
     }
     const token = generateToken(user._id);
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token,
-      status: true,
-      message: "Logged in Successfully!",
-    });
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        // secure: true, 
+        sameSite: "none", // Required for cross-site cookies
+      })
+
+      res.status(201)
+      .json({
+        user,
+        token,
+        status: true,
+        message: "Logged in Successfully!",
+      });
   } catch (error) {
     next(createCustomError("something went wrong", 500));
   }
+};
+
+exports.logout = (req, res) => {
+  return res
+    .clearCookie("jwt")
+    .status(200)
+    .json({ message: "Successfully logged out" });
 };

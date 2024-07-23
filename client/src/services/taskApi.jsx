@@ -4,7 +4,9 @@ import {toast} from "react-hot-toast"
 
 const createTask = async (data,navigate) =>{
     try {
-        const res = await axios.post(`${BASE_URL}/`,data)
+        const res = await axios.post(`${BASE_URL}/`,data,{
+            withCredentials: true // Include credentials (cookies) in the request
+          })
         navigate("/")
         toast.success(res.data.status)
     } catch (error) {
@@ -14,7 +16,7 @@ const createTask = async (data,navigate) =>{
 }
 const getTasks = async (setData) =>{
     try {
-        const res = await axios.get(`${BASE_URL}/`)
+        const res = await axios.get(`${BASE_URL}/`,{ withCredentials: true })
         setData(res.data.tasks)
         
     } catch (error) {
@@ -23,26 +25,33 @@ const getTasks = async (setData) =>{
 }
 const getTask = async (id,setTask) =>{
     try {
-        const res = await axios.get(`${BASE_URL}/${id}`)
+        const res = await axios.get(`${BASE_URL}/${id}`,{
+            withCredentials: true // Include credentials (cookies) in the request
+          })
         setTask(res.data.task)
         
     } catch (error) {
         console.log("error ",error)
     }
 }
-const deleteTask = async(id)=>{
-    console.log(id)
+const deleteTask = async(id,navigate)=>{
     try {
-        const res = await axios.delete(`${BASE_URL}/${id}`)
+        const res = await axios.delete(`${BASE_URL}/${id}`,{
+            withCredentials: true 
+          })
         toast.success(res.data.status)
+        navigate(0)
         
     } catch (error) {
         console.log("error ",error)
+        toast.error(error.response.data.message)
     }
 }
 const updateTask = async(id,data,navigate)=>{
     try {
-        const res = await axios.patch(`${BASE_URL}/${id}`,data)
+        const res = await axios.patch(`${BASE_URL}/${id}`,data,{
+            withCredentials: true // Include credentials (cookies) in the request
+          })
         toast.success(res.data.status)
         navigate("/")
     } catch (error) {
