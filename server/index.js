@@ -19,7 +19,6 @@ const corsOptions = {
     origin: 'https://task-manager-three-wheat.vercel.app', 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   };
   
 app.use(cors(corsOptions));
