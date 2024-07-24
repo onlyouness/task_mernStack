@@ -9,6 +9,8 @@ const auth = require("./routes/auth")
 const notFound = require("./middleware/not-found")
 const errorHandler = require('./middleware/error-handler')
 
+
+console.log("mongo URI: ",mongoURI)
 //Middleware to parse the body
 app.use(express.json())
 
