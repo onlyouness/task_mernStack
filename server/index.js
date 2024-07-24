@@ -22,7 +22,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   };
   
-app.use(cors());
+app.use(cors(corsOptions));
 
 //Routes
 app.use("/api/v1/tasks",tasks)
