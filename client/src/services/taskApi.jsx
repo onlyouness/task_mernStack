@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BASE_URL = "http://127.0.0.1:5000/api/v1/tasks"
+const BASE_URL = "https://task-mern-stack.vercel.app/api/v1/tasks"
 import {toast} from "react-hot-toast" 
 
 const createTask = async (data,navigate) =>{
