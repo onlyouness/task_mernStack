@@ -36,7 +36,7 @@ const start = async()=>{
         await connection(mongoURI);
         app.listen(port, console.log(`The Server Is Running on port ${port}`))
     } catch (error) {
-        console.error("error",error)
+        console.error("error with connection ",error)
     }
 }
 
